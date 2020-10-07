@@ -11,7 +11,6 @@ import numpy as np
 import re  
 import nltk  
 import matplotlib.pyplot as plt  
-#matplotlib inline
 import os
 import pickle
 from sklearn.feature_extraction.text import CountVectorizer
@@ -25,15 +24,10 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.tokenize import RegexpTokenizer
 from nltk.tokenize import sent_tokenize
-
-
-# extracting the tar files and then reading the files
 import tarfile
-
 import sklearn.utils
 from sklearn.metrics import accuracy_score
 import numpy as np
-
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
