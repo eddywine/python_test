@@ -1,20 +1,16 @@
-name: Zip Files
-
+name: Continuous Integration
 on:
-  release:
-    types: [published]
-
+  push:
+  pull_request:
 jobs:
-  zip-files:
+  composer-install:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: vimtor/action-zip@v1
+      - uses: actions/checkout@v1
+      - run: composer install --ansi --no-progress --no-interaction --prefer-dist
+      - uses: montudor/action-zip@v1
         with:
-<<<<<<< HEAD
-          files: libs/ lec12_sorting.py
-          dest: output/ result.zip
-=======
-          files: libs/
-          dest: result.zip
->>>>>>> main
+          args: zip -qq -r result.zip libs
+      - uses: actions/upload-artifact@v2
+        with:
+          name: results.zip
