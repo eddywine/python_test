@@ -18,3 +18,11 @@ jobs:
         with:
           name: assets-for-download
           path: outputs
+  zip-files:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: vimtor/action-zip@v1
+        with:
+          files: libs/
+          dest: result.zip
