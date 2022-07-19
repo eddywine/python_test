@@ -1,10 +1,23 @@
-name: Zip Files
-
-on:
-  release:
-    types: [published]
+name: Continuous Integration
+on: [pull_request]
 
 jobs:
+  composer-install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: make output directory
+        run: mkdir outputs
+      - name: Zipping the directory
+        run: |
+          cd outputs
+          zip -qq -r code.zip . -i libs
+          cd ..
+      - name: Use the Upload Artifact GitHub Action
+        uses: actions/upload-artifact@v2
+        with:
+          name: assets-for-download
+          path: outputs
   zip-files:
     runs-on: ubuntu-latest
     steps:
@@ -13,3 +26,9 @@ jobs:
         with:
           files: libs/
           dest: result.zip
+
+      - name: Install zip
+        uses: montudor/action-zip@v0.1.0
+
+      - name: Zip output
+        run: zip -qq -r function.zip libs
