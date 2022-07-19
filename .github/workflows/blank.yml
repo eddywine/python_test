@@ -11,7 +11,7 @@ jobs:
       - name: Zipping the directory
         run: |
           cd outputs
-          zip -qq -r code.zip libs
+          zip -qq -r code.zip . -i libs
           cd ..
       - name: Use the Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
