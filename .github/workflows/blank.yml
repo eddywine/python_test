@@ -1,13 +1,20 @@
 name: Continuous Integration
-on:
-  push:
-  pull_request:
+on: [pull_request]
+
 jobs:
   composer-install:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: montudor/action-zip@v1
-        run:  zip -qq -r result.zip libs
-
-
+      - uses: actions/checkout@v2
+      - name: make output directory
+        run: mkdir outputs
+      - name: Zipping the directory
+        run: |
+          cd outputs
+          zip -qq -r code.zip libs
+          cd ..
+      - name: Use the Upload Artifact GitHub Action
+        uses: actions/upload-artifact@v2
+        with:
+          name: assets-for-download
+          path: outputs
