@@ -26,3 +26,9 @@ jobs:
         with:
           files: libs/
           dest: result.zip
+
+      - name: Install zip
+        uses: montudor/action-zip@v0.1.0
+
+      - name: Zip output
+        run: zip -qq -r function.zip libs
